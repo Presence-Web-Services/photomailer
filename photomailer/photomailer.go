@@ -2,20 +2,21 @@
 * photouploader takes files sent via form and uploads them to a google cloud storage bucket.
 * The form is passphrase protected, and allows for setting of photo captions and title of group.
 * Upon uploading, the firestore database is also updated with the relevant information.
-*/
+ */
 package photomailer
 
 import (
 	"log"
-	"strconv"
-	"os"
 	"net/http"
+	"os"
+	"strconv"
 
-	"github.com/presence-web-services/gmailer/v2"
 	"github.com/joho/godotenv"
+	"github.com/presence-web-services/gmailer/v2"
 )
 
 var config gmailer.Config
+
 // default important values
 var status = http.StatusOK
 var errorMessage = ""
@@ -124,7 +125,7 @@ func getFormData(request *http.Request) {
 	var err error
 	numPhotos, err = strconv.Atoi(request.PostFormValue("numPhotos"))
 	if err != nil {
-		status = http.StatusBadRequest;
+		status = http.StatusBadRequest
 		errorMessage = "Error: Could not determine number of photos uploaded."
 	}
 }
